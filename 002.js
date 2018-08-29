@@ -3,6 +3,7 @@ const gi = require('node-gtk')
 const Gtk = gi.require('Gtk', '3.0')
 const Gdk = gi.require('Gdk', '3.0')
 const GdkX11 = gi.require('GdkX11')
+const WebKit2 = gi.require('WebKit2')
 const howdoi = require('howdoi')
 
 // Start the GLib event loop
@@ -84,7 +85,9 @@ function onSearch(...args) {
 
     console.log('forEach')
     result.answers.forEach(answer => {
-      box.packStart(new Gtk.Label({ label: answer.code }), false, false, 0)
+      const view = new WebKit2.WebView()
+      view.loadHtml(answer.html, null)
+      box.packStart(view, false, false, 0)
     })
 
     console.log('showAll')
