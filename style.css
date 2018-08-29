@@ -1,4 +1,8 @@
 
-input-box {
+#input-box {
   padding: 20px 40px;
+}
+
+#answers-box {
+  background-color: rgb(37, 42, 44);
 }

@@ -10,6 +10,7 @@
   "author": "Rom Grk <romgrk.cc@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "howdoi": "git+https://github.com/romgrk/howdoi-node.git",
     "node-gtk": "^0.2.0"
   }
 }
