@@ -60,13 +60,14 @@ window.showAll()
 
 
 /*
- * Event hanlders
+ * Event handlers
  */
 
 function onSearch(...args) {
   emptyContainer(answersBox)
   answersBox.packStart(new Gtk.Label({ label: 'Loading' }), false, false, 0)
   answersBox.showAll()
+  const pulseInterval = setInterval(() => input.progressPulse(), 200)
 
   const query = input.getText()
 
@@ -88,6 +89,13 @@ function onSearch(...args) {
     })
 
     answersBox.showAll()
+  })
+  .catch(err => {
+    // XXX(handle error)
+  })
+  .then(() => {
+    clearInterval(pulseInterval)
+    input.setProgressFraction(0)
   })
 
   return false
