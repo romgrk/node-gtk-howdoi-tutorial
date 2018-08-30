@@ -67,32 +67,30 @@ function onSearch(...args) {
   emptyContainer(answersBox)
   answersBox.packStart(new Gtk.Label({ label: 'Loading' }), false, false, 0)
   answersBox.showAll()
-  input.progressPulse()
 
   const query = input.getText()
-  howdoi({ query, results: 1, answers: 5 })
+
+  howdoi({ query, results: 1, answers: 5, engine: 'google' })
   .then(results => {
     console.log(results)
 
-    console.log('empty')
     emptyContainer(answersBox)
     const result = results[0]
 
-    console.log('create')
     const box = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL })
     answersBox.packStart(box, false, false, 0)
     box.packStart(new Gtk.Label({ label: result.title }), false, false, 0)
 
-    console.log('forEach')
     result.answers.forEach(answer => {
       const view = new WebKit2.WebView()
       view.loadHtml(answer.html, null)
       box.packStart(view, false, false, 0)
     })
 
-    console.log('showAll')
     answersBox.showAll()
   })
+
+  return false
 }
 
 
